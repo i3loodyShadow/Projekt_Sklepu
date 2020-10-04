@@ -22,12 +22,7 @@ class MoBoEditCtrl {
 
     public function validateSave() {
         
-        $this->form->id = ParamUtils::getFromPost('id');
-        $this->form->producent = ParamUtils::getFromPost('producent');
-        $this->form->model = ParamUtils::getFromPost('model');
-        $this->form->usb_3_0 = ParamUtils::getFromPost('usb_3_0');
-        $this->form->gniazdo_m_2 = ParamUtils::getFromPost('gniazdo_m_2');
-        $this->form->cena = ParamUtils::getFromPost('cena');
+        $this->form->id = ParamUtils::getFromPost('id', true, 'Błędne wywołanie aplikacji');
         
         $v = new Validator();
         
@@ -134,7 +129,7 @@ class MoBoEditCtrl {
                     if(empty($this->form->id)){
                         
                         $count = App::getDB()->count("towar");
-                        if ($count <= 50) {
+                        if ($count <= 25) {
                             //dodawanie    
                             App::getDB()->insert("towar", [
                                 "id_grupy_towarow" => 3,
