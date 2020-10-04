@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-09-30 13:17:18
+/* Smarty version 3.1.30, created on 2020-10-04 19:02:09
   from "D:\Xampp\htdocs\Projekt_Sklepu\app\views\templates\main.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f74693ed73ff2_78441337',
+  'unifunc' => 'content_5f7a0011c1dda6_07531071',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3c16b4834bb3b42595c8a7c1b9b3a7ea88a28248' => 
     array (
       0 => 'D:\\Xampp\\htdocs\\Projekt_Sklepu\\app\\views\\templates\\main.tpl',
-      1 => 1601464637,
+      1 => 1601830834,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f74693ed73ff2_78441337 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f7a0011c1dda6_07531071 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -103,14 +103,14 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
         .button-rejestracja {
             background: rgb(0, 100, 0);
         }
-        .button-koszyk{
+        .button-maroon{
             background: rgb(128, 0, 0);
         }
     </style>
 </div>    
     
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6591370325f74693ed71356_44390907', 'header');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19502085465f7a0011c1aed8_02922973', 'header');
 ?>
 
         
@@ -132,13 +132,13 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6591370325f74693ed
     <div id="app_content" class="content">
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_7316695675f74693ed72bd1_96819813', 'content');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10251145565f7a0011c1c904_16013079', 'content');
 ?>
 
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13180145725f74693ed73378_31294891', 'productsTable');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9702980415f7a0011c1d0d7_97220550', 'productsTable');
 ?>
 
 
@@ -147,7 +147,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13180145725f74693e
     <div class="footer l-box is-center">
 		<p>
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12511777085f74693ed73af7_75687425', 'footer');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1859655435f7a0011c1d846_35893024', 'footer');
 ?>
 
 		</p>
@@ -160,7 +160,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12511777085f74693e
 </body>
 </html><?php }
 /* {block 'header'} */
-class Block_6591370325f74693ed71356_44390907 extends Smarty_Internal_Block
+class Block_19502085465f7a0011c1aed8_02922973 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -178,10 +178,16 @@ Register">Zarejestruj</a></li>
             <?php }?>
             <li></li>
             <?php if (\core\RoleUtils::inRole("user")) {?>
-            <li class="pure-menu-selected"><a class="button-koszyk pure-button" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+            <li class="pure-menu-selected"><a class="button-maroon pure-button" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 ShoppingCartView">Koszyk</a></li>
             <?php }?>
+            <?php if (\core\RoleUtils::inRole("admin")) {?>
+            <li class="pure-menu-selected"><a class="button-maroon pure-button" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+usersAccountsView">Zarządzanie kontami</a></li>
+            <?php }?>
             <?php if (count($_smarty_tpl->tpl_vars['conf']->value->roles) > 0) {?>
+            <li class="pure-menu-selected"><a class="button-light_blue pure-button" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+accountEdit">Ustawienia Konta</a></li>          
             <li class="pure-menu-selected"><a class="button-logowanie pure-button" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 Logout">Wyloguj</a></li>
             <li></li>
@@ -199,7 +205,7 @@ Login">Zaloguj</a></li>
 }
 /* {/block 'header'} */
 /* {block 'content'} */
-class Block_7316695675f74693ed72bd1_96819813 extends Smarty_Internal_Block
+class Block_10251145565f7a0011c1c904_16013079 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -208,7 +214,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'content'} */
 /* {block 'productsTable'} */
-class Block_13180145725f74693ed73378_31294891 extends Smarty_Internal_Block
+class Block_9702980415f7a0011c1d0d7_97220550 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -217,7 +223,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'productsTable'} */
 /* {block 'footer'} */
-class Block_12511777085f74693ed73af7_75687425 extends Smarty_Internal_Block
+class Block_1859655435f7a0011c1d846_35893024 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
