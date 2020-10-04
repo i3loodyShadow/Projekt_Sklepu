@@ -22,12 +22,7 @@ class CaseEditCtrl {
 
     public function validateSave() {
         
-        $this->form->id = ParamUtils::getFromPost('id');
-        $this->form->producent = ParamUtils::getFromPost('producent');
-        $this->form->model = ParamUtils::getFromPost('model');
-        $this->form->rozmiar = ParamUtils::getFromPost('rozmiar');
-        $this->form->kolor = ParamUtils::getFromPost('gniazdo_m_2');
-        $this->form->cena = ParamUtils::getFromPost('cena');
+        $this->form->id = ParamUtils::getFromPost('id', true, 'Błędne wywołanie aplikacji');
         
         $v = new Validator();
         
@@ -36,8 +31,8 @@ class CaseEditCtrl {
             'required' => true,
             'required_message' => 'Podaj producenta',
             'min_length' => 2,
-            'max_length' => 10,
-            'validator_message' => 'Nazwa producenta powinna mieć od 2 do 10 znaków'
+            'max_length' => 15,
+            'validator_message' => 'Nazwa producenta powinna mieć od 2 do 15 znaków'
         ]);
         
         $this->form->model = $v->validateFromPost('model',[
@@ -100,12 +95,12 @@ class CaseEditCtrl {
                         $this->form->producent = $record['producent'];
                         $this->form->model = $record['model'];
 
-                    $model = App::getDB()->get("wartosc_parametrow","*", [
+                    $rozmiar = App::getDB()->get("wartosc_parametrow","*", [
                         "id_towar" => $this->form->id,
                         "id_nazwa_parametrow" => 11
                     ]);    
 
-                    $rozmiar = App::getDB()->get("wartosc_parametrow","*", [
+                    $kolor = App::getDB()->get("wartosc_parametrow","*", [
                         "id_towar" => $this->form->id,
                         "id_nazwa_parametrow" => 12
                     ]);
@@ -114,8 +109,8 @@ class CaseEditCtrl {
                         "id_towar" => $this->form->id,
                         "id_nazwa_parametrow" => 3
                     ]);
-                        $this->form->model = $model['wartosc_parametrow'];
                         $this->form->rozmiar = $rozmiar['wartosc_parametrow'];
+                        $this->form->kolor = $kolor['wartosc_parametrow'];
                         $this->form->cena = $cena['wartosc_parametrow'];
                 } catch (\PDOException $e) {
                     Utils::addErrorMessage('Wystąpił błąd podczas odczytu rekordu');
@@ -134,7 +129,7 @@ class CaseEditCtrl {
                     if(empty($this->form->id)){
                         
                         $count = App::getDB()->count("towar");
-                        if ($count <= 50) {
+                        if ($count <= 25) {
                             //dodawanie    
                             App::getDB()->insert("towar", [
                                 "id_grupy_towarow" => 7,
