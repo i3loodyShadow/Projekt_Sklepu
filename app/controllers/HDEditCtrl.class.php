@@ -21,12 +21,7 @@ class HDEditCtrl {
 
     public function validateSave() {
         
-        $this->form->id = ParamUtils::getFromPost('id');
-        $this->form->producent = ParamUtils::getFromPost('producent');
-        $this->form->model = ParamUtils::getFromPost('model');
-        $this->form->pojemnoscPamieci = ParamUtils::getFromPost('pojemnoscPamieci');
-        $this->form->typ = ParamUtils::getFromPost('typ');
-        $this->form->cena = ParamUtils::getFromPost('cena');
+        $this->form->id = ParamUtils::getFromPost('id', true, 'Błędne wywołanie aplikacji');
         
         $v = new Validator();
         
@@ -53,8 +48,8 @@ class HDEditCtrl {
             'required' => true,
             'required_message' => 'Podaj pojmność pamięci',
             'min_length' => 3,
-            'max_length' => 4,
-            'validator_message' => 'Pojemność pamięci powiina mieć od 3 do 4 znaków'
+            'max_length' => 6,
+            'validator_message' => 'Pojemność pamięci powiina mieć od 3 do 6 znaków'
         ]);
         
         $this->form->typ = $v->validateFromPost('typ',[
@@ -79,7 +74,7 @@ class HDEditCtrl {
     }   
     
     public function validateEdit() {
-        $this->form->id = SessionUtils::load("id_tow");
+        $this->form->id = ParamUtils::getFromCleanURL(1, true, 'Błędne wywołanie aplikacji');
         return !App::getMessages()->isError();
     }
     
@@ -133,7 +128,7 @@ class HDEditCtrl {
                     if(empty($this->form->id)){
                         
                         $count = App::getDB()->count("towar");
-                        if ($count <= 50) {
+                        if ($count <= 25) {
                             //dodawanie    
                             App::getDB()->insert("towar", [
                                 "id_grupy_towarow" => 5,
