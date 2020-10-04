@@ -20,12 +20,20 @@ Utils::addRoute('ProductPartView', 'ProductCtrl');
 Utils::addRoute('productEdit', 'ProductCtrl',['admin']);
 Utils::addRoute('productDelete', 'ProductCtrl',['admin']);
 
+Utils::addRoute('passEdit', 'AccountCtrl',['user','admin']);
+Utils::addRoute('accountEdit', 'AccountCtrl',['user','admin']);
+Utils::addRoute('passEdit', 'AccountCtrl',['user','admin']);
+Utils::addRoute('emailEdit', 'AccountCtrl',['user','admin']);
+
 Utils::addRoute('AdminView', 'AdminCtrl', ['admin']);
+Utils::addRoute('usersAccountsView', 'AdminCtrl',['admin']);
+Utils::addRoute('usersAccountsPartView', 'AdminCtrl',['admin']);
+Utils::addRoute('accountDelete', 'AdminCtrl',['admin']);
 Utils::addRoute('backToAdminNavigator', 'AdminCtrl', ['admin']);
 
-Utils::addRoute('addToShoppingCart', 'ProductCtrl', ['user','admin']);
-Utils::addRoute('ShoppingCartView', 'ShoppingCartCtrl', ['user','admin']);
-Utils::addRoute('deleteFromSC', 'ShoppingCartCtrl', ['user','admin']);
+Utils::addRoute('addToShoppingCart', 'ProductCtrl', ['user']);
+Utils::addRoute('ShoppingCartView', 'ShoppingCartCtrl', ['user']);
+Utils::addRoute('deleteFromSC', 'ShoppingCartCtrl', ['user']);
 
 Utils::addRoute('NewProcessor', 'ProcessorEditCtrl', ['admin']);
 Utils::addRoute('processorSave', 'ProcessorEditCtrl', ['admin']);
