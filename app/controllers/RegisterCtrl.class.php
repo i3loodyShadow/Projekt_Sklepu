@@ -73,7 +73,7 @@ class RegisterCtrl {
                         "haslo" => $this->form->pass,
                         "Rola_idrola" => 2
                 ]);
-                Utils::addInfoMessage('Pomyślnie zapisano rekord');
+                Utils::addInfoMessage('Pomyślnie zarejestrowano');
             } catch (\PDOException $e) {
                 Utils::addErrorMessage('Wystąpił nieoczekiwany błąd podczas zapisu rekordu');
                 if (App::getConf()->debug)
