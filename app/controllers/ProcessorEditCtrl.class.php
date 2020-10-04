@@ -22,12 +22,7 @@ class ProcessorEditCtrl {
 
     public function validateSave() {
         
-        $this->form->id = ParamUtils::getFromPost('id');
-        $this->form->producent = ParamUtils::getFromPost('producent');
-        $this->form->model = ParamUtils::getFromPost('model');
-        $this->form->taktowanie = ParamUtils::getFromPost('taktowanie');
-        $this->form->lRdzeni = ParamUtils::getFromPost('lRdzeni');
-        $this->form->cena = ParamUtils::getFromPost('cena');
+        $this->form->id = ParamUtils::getFromPost('id', true, 'Błędne wywołanie aplikacji');
         
         $v = new Validator();
         
@@ -80,7 +75,7 @@ class ProcessorEditCtrl {
     }   
     
     public function validateEdit() {
-        $this->form->id = SessionUtils::load("id_tow");
+        $this->form->id = ParamUtils::getFromCleanURL(1, true, 'Błędne wywołanie aplikacji');
         return !App::getMessages()->isError();
     }
     
@@ -134,7 +129,7 @@ class ProcessorEditCtrl {
                     if(empty($this->form->id)){
                         
                         $count = App::getDB()->count("towar");
-                        if ($count <= 50) {
+                        if ($count <= 25) {
                             //dodawanie    
                             App::getDB()->insert("towar", [
                                 "id_grupy_towarow" => 1,
@@ -175,8 +170,7 @@ class ProcessorEditCtrl {
                         }
                         
                     //aktualizacja
-                    } else  
-                        {
+                    } else {
                         App::getDB()->update("towar", [
                             "producent" => $this->form->producent,
                             "model" => $this->form->model,
