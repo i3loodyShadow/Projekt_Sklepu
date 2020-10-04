@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-09-30 10:38:51
+/* Smarty version 3.1.30, created on 2020-10-01 18:46:06
   from "D:\Xampp\htdocs\Projekt_Sklepu\app\views\AddGC.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f74441b10a504_51013911',
+  'unifunc' => 'content_5f7607ce6cdeb1_85158619',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6eca36864d6ff54a1ee069d4d8a40d51d9697ea7' => 
     array (
       0 => 'D:\\Xampp\\htdocs\\Projekt_Sklepu\\app\\views\\AddGC.tpl',
-      1 => 1601410770,
+      1 => 1601570589,
       2 => 'file',
     ),
   ),
@@ -22,25 +22,25 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:messages.tpl' => 1,
   ),
 ),false)) {
-function content_5f74441b10a504_51013911 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f7607ce6cdeb1_85158619 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_620102715f74441b109862_40243346', 'content');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19239892885f7607ce6cc9a1_45172078', 'content');
 ?>
 
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20488209865f74441b10a1f1_62422554', 'footer');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10445760875f7607ce6cd8f9_88370236', 'footer');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:main.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'content'} */
-class Block_620102715f74441b109862_40243346 extends Smarty_Internal_Block
+class Block_19239892885f7607ce6cc9a1_45172078 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -104,7 +104,7 @@ GCSave" method="post"  class="pure-form pure-form-aligned">
 }
 /* {/block 'content'} */
 /* {block 'footer'} */
-class Block_20488209865f74441b10a1f1_62422554 extends Smarty_Internal_Block
+class Block_10445760875f7607ce6cd8f9_88370236 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
