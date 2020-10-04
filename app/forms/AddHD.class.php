@@ -3,6 +3,7 @@
 namespace app\forms;
 
 class AddHD {
+    public $id;    
     public $producent;
     public $model;
     public $pojemnoscPamieci;
