@@ -4,6 +4,7 @@
 namespace app\forms;
 
 class AddMoBo {
+    public $id;    
     public $producent;
     public $model;
     public $usb_3_0;
