@@ -6,5 +6,4 @@ class AccountForm {
     public $email;
     public $login;
     public $pass;
-
 } 
