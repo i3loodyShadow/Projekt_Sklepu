@@ -22,12 +22,7 @@ class GCEditCtrl {
 
     public function validateSave() {
         
-        $this->form->id = ParamUtils::getFromPost('id');
-        $this->form->producent = ParamUtils::getFromPost('producent');
-        $this->form->model = ParamUtils::getFromPost('model');
-        $this->form->pojemnoscPamieci = ParamUtils::getFromPost('pojemnoscPamieci');
-        $this->form->predkoscPamieci = ParamUtils::getFromPost('predkoscPamieci');
-        $this->form->cena = ParamUtils::getFromPost('cena');
+        $this->form->id = ParamUtils::getFromPost('id', true, 'Błędne wywołanie aplikacji');
         
         $v = new Validator();
         
@@ -36,8 +31,8 @@ class GCEditCtrl {
             'required' => true,
             'required_message' => 'Podaj producenta',
             'min_length' => 2,
-            'max_length' => 10,
-            'validator_message' => 'Nazwa producenta powinna mieć od 2 do 10 znaków'
+            'max_length' => 15,
+            'validator_message' => 'Nazwa producenta powinna mieć od 2 do 15 znaków'
         ]);
         
         $this->form->model = $v->validateFromPost('model',[
@@ -45,26 +40,26 @@ class GCEditCtrl {
             'required' => true,
             'required_message' => 'Podaj model',
             'min_length' => 2,
-            'max_length' => 15,
-            'validator_message' => 'Nazwa modelu powinna mieć od 2 do 15 znaków'
+            'max_length' => 10,
+            'validator_message' => 'Nazwa modelu powinna mieć od 2 do 10 znaków'
         ]);
         
         $this->form->pojemnoscPamieci = $v->validateFromPost('pojemnoscPamieci',[
             'trim' => true,
             'required' => true,
-            'required_message' => 'Podaj pojemnosc',
+            'required_message' => 'Podaj taktowanie',
             'min_length' => 3,
-            'max_length' => 10,
-            'validator_message' => 'Pojemność pamięci powina mieć od 3 do 10 znaków'
+            'max_length' => 4,
+            'validator_message' => 'Taktowanie powino mieć od 3 do 4 znaków'
         ]);
         
         $this->form->predkoscPamieci = $v->validateFromPost('predkoscPamieci',[
             'trim' => true,
             'required' => true,
-            'required_message' => 'Podaj predkosc',
-            'min_length' => 4,
-            'max_length' => 10,
-            'validator_message' => 'Prędkość pamięci powinna mieć od 4 do 10 znaków'
+            'required_message' => 'Podaj liczbę rdzeni',
+            'min_length' => 6,
+            'max_length' => 7,
+            'validator_message' => 'Liczba rdzeni powinna mieć od 6 do 7 znaków'
         ]);
         
         $this->form->cena = $v->validateFromPost('cena',[
@@ -80,7 +75,7 @@ class GCEditCtrl {
     }   
     
     public function validateEdit() {
-        $this->form->id = SessionUtils::load("id_tow");
+        $this->form->id = ParamUtils::getFromCleanURL(1, true, 'Błędne wywołanie aplikacji');
         return !App::getMessages()->isError();
     }
     
@@ -91,7 +86,7 @@ class GCEditCtrl {
     }
     public function action_GCEdit() {
         if(RoleUtils::inRole('admin')){
-            if ($this->validateEdit()) {
+            if ($this->validateEdit()){
                 try {
                     $record = App::getDB()->get("towar", "*", [
                         "idtowar" => $this->form->id
@@ -131,10 +126,10 @@ class GCEditCtrl {
         if(RoleUtils::inRole('admin')){
             if ($this->validateSave()) {
                 try {
-                    if(empty($this->form->id)){
+                    if($this->form->id ==''){
                         
                         $count = App::getDB()->count("towar");
-                        if ($count <= 50) {
+                        if ($count <= 25) {
                             //dodawanie    
                             App::getDB()->insert("towar", [
                                 "id_grupy_towarow" => 2,
@@ -209,7 +204,7 @@ class GCEditCtrl {
                         ]);                    
                         Utils::addInfoMessage('Pomyślnie zaaktualizowano produkt');
 
-                    }   
+                    }    
                 } catch (\PDOException $e) {
                     Utils::addErrorMessage('Wystąpił nieoczekiwany błąd podczas zapisu rekordu');
                     if (App::getConf()->debug)
@@ -231,3 +226,5 @@ class GCEditCtrl {
         App::getSmarty()->display('AddGC.tpl');
     }
 }
+
+
