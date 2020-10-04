@@ -57,7 +57,7 @@
         .button-rejestracja {
             background: rgb(0, 100, 0);
         }
-        .button-koszyk{
+        .button-maroon{
             background: rgb(128, 0, 0);
         }
     </style>
@@ -75,9 +75,13 @@
             {/if}
             <li></li>
             {if \core\RoleUtils::inRole("user")}
-            <li class="pure-menu-selected"><a class="button-koszyk pure-button" href="{$conf->action_root}ShoppingCartView">Koszyk</a></li>
+            <li class="pure-menu-selected"><a class="button-maroon pure-button" href="{$conf->action_root}ShoppingCartView">Koszyk</a></li>
+            {/if}
+            {if \core\RoleUtils::inRole("admin")}
+            <li class="pure-menu-selected"><a class="button-maroon pure-button" href="{$conf->action_root}usersAccountsView">Zarządzanie kontami</a></li>
             {/if}
             {if count($conf->roles)>0}
+            <li class="pure-menu-selected"><a class="button-light_blue pure-button" href="{$conf->action_root}accountEdit">Ustawienia Konta</a></li>          
             <li class="pure-menu-selected"><a class="button-logowanie pure-button" href="{$conf->action_root}Logout">Wyloguj</a></li>
             <li></li>
             {else}
