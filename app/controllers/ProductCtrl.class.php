@@ -16,8 +16,7 @@ class ProductCtrl {
     private $names;
     private $Userid;
     private $id;
-    public $goodsID;
-
+    private $goodsID;
 
     public function __construct() {
         $this->form = new ProductSF();
@@ -77,11 +76,6 @@ class ProductCtrl {
         }
     }
     
-    public function validateEdit() {
-        $this->id = ParamUtils::getFromCleanURL(1, true, 'Błędne wywołanie aplikacji');
-        return !App::getMessages()->isError();
-    }
-    
     public function action_addToShoppingCart(){
         if(RoleUtils::inRole('user')){
             if($this->validateEdit()){
@@ -137,11 +131,29 @@ class ProductCtrl {
         
     }   
     
+     public function validateEdit() {
+        $this->id = ParamUtils::getFromCleanURL(1, true, 'Błędne wywołanie aplikacji');
+        return !App::getMessages()->isError();
+    }
+    
     public function action_productDelete() {
         if(RoleUtils::inRole('admin')){
             if ($this->validateEdit()) {
-
+                    
                 try {
+                    $toDelete = App::getDB()->get("towar", "model",[
+                        "idtowar" => $this->id
+                    ]);
+                    
+                    if(App::getDB()->has("towar_zamowienia", [
+                        "model" => $toDelete
+                    ])){
+                    
+                    App::getDB()->delete("towar_zamowienia",[
+                        "model" => $toDelete
+                    ]);
+                    }
+                    
                     App::getDB()->delete("wartosc_parametrow",[
                         "id_towar" => $this->id
                     ] );
@@ -165,8 +177,6 @@ class ProductCtrl {
             $this->goodsID = App::getDB()->get("towar","id_grupy_towarow",[
                 "idtowar" => $this->id
             ]);
-            
-            SessionUtils::store("id_tow", $this->goodsID);
             
             if($this->goodsID == 1){
                 App::getRouter()->forwardTo('processorEdit');
