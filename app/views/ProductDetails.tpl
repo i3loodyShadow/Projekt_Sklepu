@@ -2,7 +2,11 @@
 
 {block name=content}
 <div class="pure-menu pure-menu-horizontal bottom-margin">
+    {if (\core\RoleUtils::inRole("admin"))}  
         <a href="{$conf->action_url}backToAdminNavigator"}Opcje_administratora  class="pure-menu-heading pure-menu-link">Powrót do administracyjnego nawigatora</a>
+    {else}    
+        <a href="{$conf->action_url}ProductView"}Opcje_administratora  class="pure-menu-heading pure-menu-link">Powrót do listy produktów</a>
+    {/if}    
 </div>
 
 <div class="l-box-lrg pure-u-1 pure-u-med-1">
@@ -37,9 +41,10 @@
                 </div>
             </li>
         </ul>
-    </div>                
+    </div>
+    
     <div class="l-box-lrg pure-u-1 pure-u-med-1-2">
-        <table style="margin: auto;" id="tab_parametrow" class="pure-table pure-table-bordered pure-form pure-form-align">
+        <table style="height: 30em; margin: auto;  align-items: center; justify-content: center" id="tab_parametrow" class="pure-table pure-table-bordered pure-form pure-form-align">
             <thead>
                 <tr>
                     <tr><th colspan="2">Parametry produktu</th></tr>
