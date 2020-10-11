@@ -16,7 +16,6 @@ class ProductCtrl {
     private $names;
     private $Userid;
     private $id;
-    private $goodsID;
 
     public function __construct() {
         $this->form = new ProductSF();
@@ -58,22 +57,6 @@ class ProductCtrl {
                 Utils::addErrorMessage($e->getMessage());
         }
         
-        try {
-            $this->records = App::getDB()->select("towar", [
-                    "[><]wartosc_parametrow" => ["idtowar" => "id_towar"],
-                    "[><]nazwa_parametrow" => ["wartosc_parametrow.id_nazwa_parametrow" => "idnazwa_parametrow"]
-                ],[
-                "towar.idtowar",
-                "nazwa_parametrow.nazwa_parametru",
-                "wartosc_parametrow.wartosc_parametrow"
-                ],$where);
-        } catch (\PDOException $e) {
-            Utils::addErrorMessage('Wystąpił błąd podczas pobierania danych z bazy!');
-            if (App::getConf()->debug){
-                Utils::addErrorMessage($e->getMessage());
-            }
-        
-        }
     }
     
     public function action_addToShoppingCart(){
@@ -131,7 +114,7 @@ class ProductCtrl {
         
     }   
     
-     public function validateEdit() {
+    public function validateEdit() {
         $this->id = ParamUtils::getFromCleanURL(1, true, 'Błędne wywołanie aplikacji');
         return !App::getMessages()->isError();
     }
@@ -172,40 +155,26 @@ class ProductCtrl {
         }
     }
     
-    public function action_productEdit() {
+    public function action_ProductEdition(){
         if($this->validateEdit()){
-            $this->goodsID = App::getDB()->get("towar","id_grupy_towarow",[
-                "idtowar" => $this->id
-            ]);
-            
-            if($this->goodsID == 1){
-                App::getRouter()->forwardTo('processorEdit');
-            }
-            
-            if($this->goodsID == 2){
-                App::getRouter()->forwardTo('GCEdit');
-            }
-            
-            if($this->goodsID == 3){
-                App::getRouter()->forwardTo('MoBoEdit');
-            }
-            
-            if($this->goodsID == 4){
-                App::getRouter()->forwardTo('RAMEdit');
-            }
-            
-            if($this->goodsID == 5){
-                App::getRouter()->forwardTo('NewHD');
-            }
-            
-            if($this->goodsID == 6){
-                App::getRouter()->forwardTo('PSEdit');
-            }
-            
-            if($this->goodsID == 7){
-                App::getRouter()->forwardTo('CaseEdit');
-            }
+            $goodsID = $this->id;
+            SessionUtils::store("goodsID", $goodsID);
+
+            App::getRouter()->forwardTo('productEdit');
         }
+    }
+    
+    public function action_ProductDetails(){
+        if($this->validateEdit()){
+            $goodsID = $this->id;
+            SessionUtils::store("goodsID", $goodsID);
+            
+            App::getRouter()->forwardTo('productDetails');
+        }    
+    }
+      
+    public function action_NewProduct(){
+        App::getSmarty()->display('AddProduct.tpl');
     }
         
     public function action_ProductView() {
