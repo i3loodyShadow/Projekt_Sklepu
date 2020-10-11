@@ -9,6 +9,12 @@
 	border-color: #603;
 }
 
+div.centered {
+  height: 10em;
+  display: flex;
+  align-items: center;
+  justify-content: center }
+
 .mgl{
     margin-left: 50px;
 }
