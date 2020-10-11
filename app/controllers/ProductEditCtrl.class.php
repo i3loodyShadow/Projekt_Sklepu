@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use core\App;
 use core\Utils;
-use core\RoleUtils;
 use core\ParamUtils;
 use core\SessionUtils;
 use app\forms\AddProduct;
